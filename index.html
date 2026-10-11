@@ -1,0 +1,889 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fashion Store | Ropa Moderna</title>
+    <!-- Font Awesome para iconos -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* ===== RESET Y ESTILOS GLOBALES ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background-color: #f8f8f8;
+            color: #1e1e1e;
+            line-height: 1.5;
+        }
+
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* ===== HEADER ===== */
+        header {
+            background-color: #ffffff;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 16px 0;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            color: #000;
+        }
+
+        .logo span {
+            color: #e63946;
+        }
+
+        .search-bar {
+            display: flex;
+            align-items: center;
+            background: #f1f1f1;
+            border-radius: 40px;
+            padding: 8px 18px;
+            flex: 1 1 300px;
+            max-width: 400px;
+        }
+
+        .search-bar i {
+            color: #777;
+            margin-right: 10px;
+        }
+
+        .search-bar input {
+            border: none;
+            background: transparent;
+            width: 100%;
+            font-size: 15px;
+            outline: none;
+        }
+
+        .header-icons {
+            display: flex;
+            gap: 22px;
+            font-size: 20px;
+            color: #222;
+        }
+
+        .header-icons i {
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+
+        .header-icons i:hover {
+            color: #e63946;
+        }
+
+        .menu-toggle {
+            display: none;
+            font-size: 26px;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        /* ===== NAV ===== */
+        nav {
+            border-top: 1px solid #eee;
+            padding: 12px 0;
+        }
+
+        .nav-links {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            list-style: none;
+            flex-wrap: wrap;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #2b2b2b;
+            font-weight: 500;
+            font-size: 16px;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover {
+            color: #e63946;
+        }
+
+        /* ===== SLIDER (BANNERS) ===== */
+        .slider-section {
+            margin: 25px 0 40px;
+        }
+
+        .slider-container {
+            position: relative;
+            width: 100%;
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
+        }
+
+        .slider {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+            height: 100%;
+        }
+
+        .slide {
+            min-width: 100%;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            height: 380px;
+            background-size: cover;
+            background-position: center;
+        }
+
+        /* Fondo de cada slide (imágenes de ejemplo con gradiente para que se vean bien) */
+        .slide-1 {
+            background-image: linear-gradient(135deg, rgba(0,0,0,0.4), rgba(0,0,0,0.2)), url('https://images.unsplash.com/photo-1483985988355-763728e1935b?q=80&w=1470&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+        }
+        .slide-2 {
+            background-image: linear-gradient(135deg, rgba(0,0,0,0.4), rgba(0,0,0,0.2)), url('https://images.unsplash.com/photo-1441986300917-64674bd600d8?q=80&w=1470&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+        }
+        .slide-3 {
+            background-image: linear-gradient(135deg, rgba(0,0,0,0.4), rgba(0,0,0,0.2)), url('https://images.unsplash.com/photo-1533659828870-95ee305cee3e?q=80&w=1470&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+        }
+
+        .slide-content {
+            color: white;
+            max-width: 700px;
+            padding: 0 20px;
+            text-shadow: 0 4px 12px rgba(0,0,0,0.4);
+        }
+
+        .slide-content h2 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            letter-spacing: -0.5px;
+        }
+
+        .slide-content p {
+            font-size: 1.3rem;
+            margin-bottom: 25px;
+            font-weight: 300;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: #e63946;
+            color: white;
+            padding: 14px 38px;
+            border-radius: 40px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.25s;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 8px 18px rgba(230, 57, 70, 0.3);
+        }
+
+        .btn:hover {
+            background-color: #c1121f;
+            transform: translateY(-3px);
+            box-shadow: 0 12px 22px rgba(230, 57, 70, 0.4);
+        }
+
+        /* Flechas del slider */
+        .slider-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255, 255, 255, 0.25);
+            backdrop-filter: blur(8px);
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            font-size: 22px;
+            color: white;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.3s;
+            z-index: 10;
+        }
+
+        .slider-btn:hover {
+            background: rgba(255, 255, 255, 0.5);
+            color: #000;
+        }
+
+        .prev {
+            left: 20px;
+        }
+
+        .next {
+            right: 20px;
+        }
+
+        /* Puntos de navegación */
+        .dots {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 12px;
+            z-index: 10;
+        }
+
+        .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.6);
+            cursor: pointer;
+            transition: all 0.3s;
+            border: 2px solid transparent;
+        }
+
+        .dot.active {
+            background: #ffffff;
+            transform: scale(1.2);
+            border-color: #e63946;
+        }
+
+        /* ===== TÍTULOS DE SECCIÓN ===== */
+        .section-title {
+            font-size: 2rem;
+            font-weight: 700;
+            margin: 50px 0 25px;
+            text-align: center;
+            letter-spacing: -0.5px;
+        }
+
+        .section-title span {
+            border-bottom: 4px solid #e63946;
+            padding-bottom: 8px;
+        }
+
+        /* ===== GRID DE PRODUCTOS ===== */
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+
+        .product-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 8px 22px rgba(0, 0, 0, 0.05);
+            transition: transform 0.25s, box-shadow 0.25s;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .product-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 18px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .product-img {
+            height: 280px;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+
+        /* Imágenes de productos (placeholder con gradientes) */
+        .img-1 { background-image: url('https://images.unsplash.com/photo-1523381210434-271e8be1f52b?q=80&w=1470&auto=format&fit=crop'); }
+        .img-2 { background-image: url('https://images.unsplash.com/photo-1539533018447-63fcce2678e3?q=80&w=1470&auto=format&fit=crop'); }
+        .img-3 { background-image: url('https://images.unsplash.com/photo-1542272604-787c3835535d?q=80&w=1470&auto=format&fit=crop'); }
+        .img-4 { background-image: url('https://images.unsplash.com/photo-1556905055-8f358a7a47b2?q=80&w=1470&auto=format&fit=crop'); }
+
+        .product-badge {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background: #e63946;
+            color: white;
+            font-size: 12px;
+            font-weight: 600;
+            padding: 5px 12px;
+            border-radius: 40px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .product-info {
+            padding: 18px 16px 20px;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+
+        .product-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 6px;
+            color: #1e1e1e;
+        }
+
+        .product-price {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #e63946;
+            margin-bottom: 14px;
+        }
+
+        .product-price s {
+            font-size: 0.9rem;
+            color: #999;
+            font-weight: 400;
+            margin-left: 8px;
+        }
+
+        .btn-small {
+            background: #1e1e1e;
+            color: white;
+            border: none;
+            padding: 12px 16px;
+            border-radius: 40px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: background 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            margin-top: auto;
+        }
+
+        .btn-small:hover {
+            background: #e63946;
+        }
+
+        /* ===== FOOTER ===== */
+        footer {
+            background: #111;
+            color: #ddd;
+            padding: 50px 0 30px;
+            margin-top: 30px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-col h4 {
+            color: white;
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        .footer-col ul {
+            list-style: none;
+        }
+
+        .footer-col ul li {
+            margin-bottom: 12px;
+        }
+
+        .footer-col a {
+            color: #aaa;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .footer-col a:hover {
+            color: #e63946;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 18px;
+            font-size: 1.5rem;
+            margin-top: 15px;
+        }
+
+        .social-icons a {
+            color: #aaa;
+            transition: color 0.2s;
+        }
+
+        .social-icons a:hover {
+            color: #e63946;
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 25px;
+            border-top: 1px solid #222;
+            color: #777;
+            font-size: 0.9rem;
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 900px) {
+            .slide-content h2 {
+                font-size: 2.4rem;
+            }
+            .slide-content p {
+                font-size: 1.1rem;
+            }
+            .slide {
+                height: 320px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header-content {
+                justify-content: space-between;
+            }
+
+            .search-bar {
+                order: 3;
+                flex: 1 1 100%;
+                max-width: 100%;
+                margin-top: 8px;
+            }
+
+            .menu-toggle {
+                display: block;
+                order: 2;
+            }
+
+            .header-icons {
+                order: 1;
+                gap: 18px;
+                font-size: 22px;
+            }
+
+            .logo {
+                order: 0;
+                font-size: 24px;
+            }
+
+            nav {
+                display: none;
+                width: 100%;
+            }
+
+            nav.active {
+                display: block;
+            }
+
+            .nav-links {
+                flex-direction: column;
+                gap: 15px;
+                padding: 15px 0;
+                align-items: center;
+            }
+
+            .slide-content h2 {
+                font-size: 1.9rem;
+            }
+
+            .slide-content p {
+                font-size: 1rem;
+            }
+
+            .slide {
+                height: 280px;
+            }
+
+            .slider-btn {
+                width: 40px;
+                height: 40px;
+                font-size: 18px;
+            }
+
+            .prev {
+                left: 10px;
+            }
+
+            .next {
+                right: 10px;
+            }
+
+            .section-title {
+                font-size: 1.7rem;
+            }
+
+            .products-grid {
+                grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+                gap: 18px;
+            }
+
+            .product-img {
+                height: 200px;
+            }
+
+            .product-title {
+                font-size: 1rem;
+            }
+
+            .product-price {
+                font-size: 1.1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .slide-content h2 {
+                font-size: 1.5rem;
+            }
+
+            .slide-content p {
+                font-size: 0.9rem;
+            }
+
+            .slide {
+                height: 240px;
+            }
+
+            .btn {
+                padding: 10px 22px;
+                font-size: 0.9rem;
+            }
+
+            .products-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 12px;
+            }
+
+            .product-img {
+                height: 160px;
+            }
+
+            .product-info {
+                padding: 12px 10px 16px;
+            }
+
+            .btn-small {
+                font-size: 0.8rem;
+                padding: 8px 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ===== HEADER ===== -->
+    <header>
+        <div class="container header-content">
+            <div class="logo">Fashion<span>Store</span></div>
+            <div class="search-bar">
+                <i class="fas fa-search"></i>
+                <input type="text" placeholder="Buscar ropa, zapatos...">
+            </div>
+            <div class="header-icons">
+                <i class="far fa-heart"></i>
+                <i class="far fa-user"></i>
+                <i class="fas fa-shopping-bag"></i>
+            </div>
+            <button class="menu-toggle" id="menuToggle" aria-label="Menú">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+        <nav id="mainNav">
+            <ul class="nav-links">
+                <li><a href="#">Inicio</a></li>
+                <li><a href="#">Mujer</a></li>
+                <li><a href="#">Hombre</a></li>
+                <li><a href="#">Accesorios</a></li>
+                <li><a href="#">Ofertas</a></li>
+                <li><a href="#">Contacto</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- ===== SLIDER ===== -->
+    <section class="slider-section container">
+        <div class="slider-container">
+            <div class="slider" id="slider">
+                <!-- Slide 1 -->
+                <div class="slide slide-1">
+                    <div class="slide-content">
+                        <h2>Nueva Colección Primavera</h2>
+                        <p>Descubre las últimas tendencias en moda urbana</p>
+                        <a href="#" class="btn">Comprar ahora</a>
+                    </div>
+                </div>
+                <!-- Slide 2 -->
+                <div class="slide slide-2">
+                    <div class="slide-content">
+                        <h2>Hasta 40% de Descuento</h2>
+                        <p>En prendas seleccionadas de temporada</p>
+                        <a href="#" class="btn">Ver ofertas</a>
+                    </div>
+                </div>
+                <!-- Slide 3 -->
+                <div class="slide slide-3">
+                    <div class="slide-content">
+                        <h2>Envío Gratis</h2>
+                        <p>En compras superiores a $50</p>
+                        <a href="#" class="btn">Aprovechar</a>
+                    </div>
+                </div>
+            </div>
+            <!-- Flechas -->
+            <button class="slider-btn prev" id="prevBtn"><i class="fas fa-chevron-left"></i></button>
+            <button class="slider-btn next" id="nextBtn"><i class="fas fa-chevron-right"></i></button>
+            <!-- Puntos -->
+            <div class="dots" id="dots">
+                <span class="dot active" data-index="0"></span>
+                <span class="dot" data-index="1"></span>
+                <span class="dot" data-index="2"></span>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== PRODUCTOS DESTACADOS ===== -->
+    <section class="container">
+        <h2 class="section-title"><span>Lo más vendido</span></h2>
+        <div class="products-grid">
+            <!-- Producto 1 -->
+            <div class="product-card">
+                <div class="product-img img-1">
+                    <span class="product-badge">Nuevo</span>
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title">Chaqueta de mezclilla</h3>
+                    <div class="product-price">$49.99 <s>$79.99</s></div>
+                    <button class="btn-small"><i class="fas fa-cart-plus"></i> Añadir</button>
+                </div>
+            </div>
+            <!-- Producto 2 -->
+            <div class="product-card">
+                <div class="product-img img-2">
+                    <span class="product-badge">-20%</span>
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title">Vestido floral</h3>
+                    <div class="product-price">$35.99 <s>$44.99</s></div>
+                    <button class="btn-small"><i class="fas fa-cart-plus"></i> Añadir</button>
+                </div>
+            </div>
+            <!-- Producto 3 -->
+            <div class="product-card">
+                <div class="product-img img-3">
+                    <span class="product-badge">Top</span>
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title">Camiseta oversize</h3>
+                    <div class="product-price">$19.99 <s>$29.99</s></div>
+                    <button class="btn-small"><i class="fas fa-cart-plus"></i> Añadir</button>
+                </div>
+            </div>
+            <!-- Producto 4 -->
+            <div class="product-card">
+                <div class="product-img img-4">
+                    <span class="product-badge">Oferta</span>
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title">Pantalón cargo</h3>
+                    <div class="product-price">$42.99 <s>$59.99</s></div>
+                    <button class="btn-small"><i class="fas fa-cart-plus"></i> Añadir</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== FOOTER ===== -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-col">
+                    <h4>FashionStore</h4>
+                    <p style="color:#aaa; margin-bottom:15px;">Moda urbana con estilo único. Calidad y tendencia en cada prenda.</p>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-tiktok"></i></a>
+                        <a href="#"><i class="fab fa-pinterest"></i></a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h4>Tienda</h4>
+                    <ul>
+                        <li><a href="#">Mujer</a></li>
+                        <li><a href="#">Hombre</a></li>
+                        <li><a href="#">Accesorios</a></li>
+                        <li><a href="#">Novedades</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Ayuda</h4>
+                    <ul>
+                        <li><a href="#">Envíos</a></li>
+                        <li><a href="#">Devoluciones</a></li>
+                        <li><a href="#">Guía de tallas</a></li>
+                        <li><a href="#">Contacto</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Contacto</h4>
+                    <ul>
+                        <li><i class="fas fa-map-marker-alt" style="margin-right:8px;"></i> Av. Principal 123</li>
+                        <li><i class="fas fa-phone" style="margin-right:8px;"></i> +1 234 567 890</li>
+                        <li><i class="fas fa-envelope" style="margin-right:8px;"></i> hola@fashionstore.com</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                &copy; 2025 FashionStore. Todos los derechos reservados.
+            </div>
+        </div>
+    </footer>
+
+    <!-- ===== JAVASCRIPT ===== -->
+    <script>
+        (function() {
+            // --- SLIDER ---
+            const slider = document.getElementById('slider');
+            const slides = document.querySelectorAll('.slide');
+            const dots = document.querySelectorAll('.dot');
+            const prevBtn = document.getElementById('prevBtn');
+            const nextBtn = document.getElementById('nextBtn');
+            let currentIndex = 0;
+            const totalSlides = slides.length;
+            let autoInterval;
+
+            function updateSlider() {
+                slider.style.transform = `translateX(-${currentIndex * 100}%)`;
+                // Actualizar dots
+                dots.forEach((dot, i) => {
+                    dot.classList.toggle('active', i === currentIndex);
+                });
+            }
+
+            function nextSlide() {
+                currentIndex = (currentIndex + 1) % totalSlides;
+                updateSlider();
+            }
+
+            function prevSlide() {
+                currentIndex = (currentIndex - 1 + totalSlides) % totalSlides;
+                updateSlider();
+            }
+
+            function goToSlide(index) {
+                currentIndex = index;
+                updateSlider();
+            }
+
+            // Event listeners
+            nextBtn.addEventListener('click', () => {
+                nextSlide();
+                resetAutoSlide();
+            });
+
+            prevBtn.addEventListener('click', () => {
+                prevSlide();
+                resetAutoSlide();
+            });
+
+            dots.forEach(dot => {
+                dot.addEventListener('click', (e) => {
+                    const index = parseInt(e.target.dataset.index);
+                    goToSlide(index);
+                    resetAutoSlide();
+                });
+            });
+
+            // Auto slide cada 5 segundos
+            function startAutoSlide() {
+                autoInterval = setInterval(nextSlide, 5000);
+            }
+
+            function resetAutoSlide() {
+                clearInterval(autoInterval);
+                startAutoSlide();
+            }
+
+            startAutoSlide();
+
+            // Pausar auto slide al pasar el mouse (opcional)
+            const sliderContainer = document.querySelector('.slider-container');
+            sliderContainer.addEventListener('mouseenter', () => {
+                clearInterval(autoInterval);
+            });
+            sliderContainer.addEventListener('mouseleave', () => {
+                startAutoSlide();
+            });
+
+            // --- MENÚ HAMBURGUESA (RESPONSIVE) ---
+            const menuToggle = document.getElementById('menuToggle');
+            const mainNav = document.getElementById('mainNav');
+
+            menuToggle.addEventListener('click', () => {
+                mainNav.classList.toggle('active');
+                // Cambiar icono
+                const icon = menuToggle.querySelector('i');
+                if (mainNav.classList.contains('active')) {
+                    icon.classList.remove('fa-bars');
+                    icon.classList.add('fa-times');
+                } else {
+                    icon.classList.remove('fa-times');
+                    icon.classList.add('fa-bars');
+                }
+            });
+
+            // Cerrar menú al hacer clic en un enlace (en móvil)
+            document.querySelectorAll('.nav-links a').forEach(link => {
+                link.addEventListener('click', () => {
+                    if (window.innerWidth <= 768) {
+                        mainNav.classList.remove('active');
+                        const icon = menuToggle.querySelector('i');
+                        icon.classList.remove('fa-times');
+                        icon.classList.add('fa-bars');
+                    }
+                });
+            });
+
+            // Ajustar al redimensionar
+            window.addEventListener('resize', () => {
+                if (window.innerWidth > 768) {
+                    mainNav.classList.remove('active');
+                    const icon = menuToggle.querySelector('i');
+                    icon.classList.remove('fa-times');
+                    icon.classList.add('fa-bars');
+                }
+            });
+        })();
+    </script>
+</body>
+</html>
